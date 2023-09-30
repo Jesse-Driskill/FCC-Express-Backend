@@ -4,6 +4,12 @@ require('dotenv').config();
 
 console.log("Hello World");
 
+app.get("/:word/echo", (req, res, next) => {
+    let word = req.params.word;
+    res.json({echo: word});
+    // next();
+})
+
 app.get("/now", (req, res, next) => {
     req.time = new Date().toString();
     next();
