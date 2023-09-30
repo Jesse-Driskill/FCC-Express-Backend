@@ -1,8 +1,16 @@
 let express = require('express');
 let app = express();
 require('dotenv').config();
+let bodyParser = require("body-parser");
 
 console.log("Hello World");
+
+app.use(bodyParser.urlencoded({extended: false}))
+
+app.get("/name", (req, res) => {
+    let fullname = req.query.first + " " + req.query.last;
+    res.json({name: fullname});
+});
 
 app.get("/:word/echo", (req, res, next) => {
     let word = req.params.word;
