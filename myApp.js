@@ -4,6 +4,18 @@ require('dotenv').config();
 
 console.log("Hello World");
 
+app.get("/now", (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+}, (req, res) => {
+    res.json({time: req.time});
+});
+
+app.use((req, res, next) => {
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+})
+
 app.get("/json", (req, res) => {
     let message = "Hello json";
     if (process.env.MESSAGE_STYLE === "uppercase") {
