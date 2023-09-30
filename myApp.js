@@ -5,7 +5,13 @@ let bodyParser = require("body-parser");
 
 console.log("Hello World");
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.post("/name", (req, res) => {
+    // console.log(req.body);
+    res.json({name: `${req.body.first} ${req.body.last}`})
+});
+
 
 app.get("/name", (req, res) => {
     let fullname = req.query.first + " " + req.query.last;
